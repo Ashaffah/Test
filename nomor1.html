@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <h2>Input one line of words (S) : </h2>
+
+  <input id="character">
+  <button type="button" onclick="searhCharacter()">Submit</button>
+
+  <p>Vowel Characters :</p>
+  <p id="charVowel"></p>
+  <p>Consonant Characters :</p>
+  <p id="charConsonant"></p>
+
+
+  <script>
+    const typeVowels = ["a", "e", "i", "o", "u"]
+
+    function isVowel(character) { return !!typeVowels.find(vowel => character.toLowerCase() === vowel) }
+    function notVowel(character) { return !typeVowels.find(vowel => character.toLowerCase() === vowel) }
+
+    function procVowel(arr) {
+      let result = ""
+
+      for (const i of arr) {
+        if (typeof i === "string") {
+          for (const j of i) {
+            if (isVowel(j)) {
+              result += j.toLowerCase()
+            }
+          }
+        }
+        else result += procVowel(i)
+      }
+
+      return result
+    }
+
+    function procConsonant(arr) {
+      let result = ""
+
+      for (const i of arr) {
+        if (typeof i === "string") {
+          for (const j of i) {
+            if (notVowel(j)) {
+              result += j.toLowerCase()
+            }
+          }
+        }
+        else result += procVowel(i)
+      }
+
+      return result
+    }
+
+    /***************************************************/
+
+    function searhCharacter() {
+
+      let inputData = document.getElementById("character").value;
+      const nestedArr = [inputData]
+
+      document.getElementById("charVowel").innerHTML = procVowel(nestedArr);
+      document.getElementById("charConsonant").innerHTML = procConsonant(nestedArr);
+    }
+
+  </script>
+
+</body>
+
+</html>

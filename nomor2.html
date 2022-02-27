@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>PSBB ( Pembatasan Sosial Berskala Besar )</h2>
+
+    <p>Number Of Family :</p>
+    <input id="inputFamily" />
+    <p>Number Of Members :</p>
+    <input id="inputMember" /><br />
+    <button style="margin-top: 10px" type="button" onclick="searhCharacter()">
+      Submit
+    </button>
+
+    <p style="margin-top: 50px">Minimum bus required is :</p>
+    <p id="value"></p>
+
+    <script>
+      function searhCharacter() {
+        const maxFamily = 2;
+        const maxPassengers = 5;
+        let cachePassanger = 4;
+        let hasil = 0;
+
+        const numberOfFamily = document.getElementById("inputFamily").value;
+        const numberOfMember = document.getElementById("inputMember").value;
+        let changeWording = numberOfMember.split(" ");
+        if (changeWording.length == numberOfFamily) {
+          changeWording.map((val, i) => {
+            if (val < maxPassengers) {
+              if (cachePassanger / numberOfFamily) {
+                cachePassanger -= val;
+                hasil += 1;
+                console.log(val, "tambah");
+              } else {
+                cachePassanger >= 4;
+                console.log(val, "tidak");
+              }
+              // console.log(val, cachePassanger)
+            }
+          });
+        } else {
+          hasil = "Input must be equal with count of family";
+        }
+        document.getElementById("value").innerHTML = hasil;
+      }
+    </script>
+  </body>
+</html>
